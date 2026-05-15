@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Anniversary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Special+Elite&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== SECTION 1: LOADING SCREEN ========== -->
+  <div id="loading-screen" class="screen active">
+    <div class="loading-bg"></div>
+    <div class="flower-builder" id="flowerBuilder">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="petal p5"></div>
+      <div class="petal p6"></div>
+      <div class="petal p7"></div>
+      <div class="petal p8"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="loading-text" id="loadingText">
+      <span class="lt-h">H</span><span class="lt-a">a</span><span class="lt-p">p</span><span class="lt-p2">p</span><span class="lt-y">y</span>
+      <span class="lt-space"> </span>
+      <span class="lt-A">A</span><span class="lt-n">n</span><span class="lt-n2">n</span><span class="lt-i">i</span><span class="lt-v">v</span><span class="lt-e">e</span><span class="lt-r">r</span><span class="lt-s">s</span><span class="lt-a2">a</span><span class="lt-r2">r</span><span class="lt-y2">y</span><span class="lt-ex">!</span>
+    </div>
+    <div class="loading-particles">
+      <!-- Particles left empty for CSS styling (no emojis) -->
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 2: MINIGAMES ========== -->
+  <div id="minigame-screen" class="screen">
+    <div class="mg-bg" style="background-image: url('img/stuff/bg3.jpg')"></div>
+    <div class="mg-overlay"></div>
+
+    <!-- Floating deco -->
+    <div class="float-deco">
+      <img src="img/stuff/stuffheartsticker.png" class="fd-hearts" alt="Heart Deco">
+      <img src="img/stuff/stufflovetulisanmygirlkecil.png" class="fd-mygirl" alt="My Girl Deco">
+      <img src="img/stuff/stuffkamera.png" class="fd-kamera" alt="Camera Deco">
+    </div>
+
+    <div class="mg-container">
+      <div class="mg-card">
+        <div class="mg-deco-top">
+          <img src="img/stuff/stuffprangkovalentine.jpg" alt="Stamp Deco" class="stamp-deco">
+        </div>
+
+        <!-- Q1 -->
+        <div class="question-box" id="q1">
+          <div class="q-number">01 <span class="q-slash">/</span> 03</div>
+          <p class="q-text">Tanggal jadian kita?</p>
+          <input type="text" class="q-input" id="input1" placeholder="ketik jawabanmu..." autocomplete="off"/>
+          <div class="q-hint" id="hint1"></div>
+          <button class="q-btn" onclick="checkQ1()">Jawab &rarr;</button>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-box hidden" id="q2">
+          <div class="q-number">02 <span class="q-slash">/</span> 03</div>
+          <p class="q-text">Tanggal lahir pacar kamu?</p>
+          <input type="text" class="q-input" id="input2" placeholder="ketik jawabanmu..." autocomplete="off"/>
+          <div class="q-hint" id="hint2"></div>
+          <button class="q-btn" onclick="checkQ2()">Jawab &rarr;</button>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-box hidden" id="q3">
+          <div class="q-number">03 <span class="q-slash">/</span> 03</div>
+          <p class="q-text">Kiss Your Boy Friend For Unlock This</p>
+          <input type="text" class="q-input" id="input3" placeholder="anything..." autocomplete="off"/>
+          <div class="q-hint" id="hint3" style="color: #ff6b9d">Apapun yang kamu ketik... pasti bener kok.</div>
+          <button class="q-btn" onclick="checkQ3()">Jawab &rarr;</button>
+        </div>
+
+        <!-- Success -->
+        <div class="question-box hidden" id="q-success">
+          <div class="success-icon">&check;</div>
+          <p class="q-text success-text">Yeay! Kamu berhasil!<br><span style="font-size:0.85em">selamat datang di scrapbook kita.</span></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Petal Transition Overlay -->
+    <div id="petal-transition" class="petal-transition hidden">
+      <div class="pt-petals" id="ptPetals"></div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 3: SCRAPBOOK ========== -->
+  <div id="scrapbook-screen" class="screen">
+
+    <!-- Background layers -->
+    <div class="sb-bg">
+      <div class="sb-bg-top" style="background-image: url('img/stuff/bg1.jpg')"></div>
+      <div class="sb-bg-bot" style="background-image: url('img/stuff/bg2.jpg')"></div>
+    </div>
+
+    <!-- Fixed corner/edge decorations -->
+    <img src="img/stuff/stuffpotongankoran.png" class="deco deco-koran" alt="Koran">
+    <img src="img/stuff/stuffpotongankertas.png" class="deco deco-kertas-left" alt="Kertas">
+    <img src="img/stuff/stuffpotongankertas2.png" class="deco deco-kertas2-tr" alt="Kertas 2 TR">
+    <img src="img/stuff/stuffpotongankertas2.png" class="deco deco-kertas2-bl" alt="Kertas 2 BL">
+    <img src="img/stuff/stufftanahrumput.png" class="deco deco-rumput" alt="Rumput">
+    <img src="img/stuff/stuffbungamatahari.png" class="deco deco-bunga-br" alt="Bunga Matahari">
+
+    <!-- Scrollable content -->
+    <div class="sb-content">
+
+      <!-- Header -->
+      <div class="sb-header">
+        <img src="img/stuff/happyanivtulisan.png" class="aniv-title" alt="Happy Anniversary">
+        <p class="aniv-sub">Satu tahun penuh warna...</p>
+      </div>
+
+      <!-- Scattered stuffs row 1 -->
+      <div class="stuff-row sr1">
+        <img src="img/stuff/stuffmegaphone.png" class="stuff-item s-megaphone" alt="Megaphone">
+        <img src="img/stuff/stuffuno.jpg" class="stuff-item s-uno" alt="Uno">
+        <img src="img/stuff/stufflovetulisanmygirlkecil.png" class="stuff-item s-mygirl" alt="My Girl">
+      </div>
+
+      <!-- MOMENT: Birthday -->
+      <div class="moment-section">
+        <div class="moment-label">Birthday Moments</div>
+        <div class="polaroid-cluster">
+          <div class="polaroid tilt-left">
+            <img src="img/andrea/cakebirthday17.jpeg" alt="Birthday 17">
+            <div class="polaroid-caption">Ultah ke-17, si cantik tambah dewasa.</div>
+          </div>
+          <div class="polaroid tilt-right">
+            <img src="img/andrea/cakebirthday18.jpeg" alt="Birthday 18">
+            <div class="polaroid-caption">Ultah ke-18 - welcome to adulthood, bebey.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 2 -->
+      <div class="stuff-scatter ss2">
+        <img src="img/stuff/stuffbuketbungamatahari.png" class="stuff-item s-buket" alt="Buket">
+        <img src="img/stuff/stuffheartsticker.png" class="stuff-item s-heart" alt="Heart">
+      </div>
+
+      <!-- MOMENT: Bubu -->
+      <div class="moment-section">
+        <div class="moment-label">Momen Sama Bubu</div>
+        <div class="polaroid-cluster">
+          <div class="polaroid tilt-none">
+            <img src="img/andrea/andreabubu.jpg" alt="Andrea & Bubu">
+            <div class="polaroid-caption">Bubu si kelinci abu-abu kesayangan kita.</div>
+          </div>
+          <div class="polaroid tilt-left">
+            <img src="img/andrea/maulandreabubu.jpg" alt="Maul & Andrea & Bubu">
+            <div class="polaroid-caption">Kita bertiga — nostalgia paling manis.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 3 -->
+      <div class="stuff-scatter ss3">
+        <img src="img/stuff/stuffowen.png" class="stuff-item s-owen" alt="Owen">
+        <img src="img/stuff/stuffkamera.png" class="stuff-item s-kamera" alt="Kamera">
+      </div>
+
+      <!-- MOMENT: Hadiah dari Andrea -->
+      <div class="moment-section">
+        <div class="moment-label">Hadiah-hadiah Lucu dari Andrea</div>
+        <div class="polaroid-cluster cluster-wide">
+          <div class="polaroid tilt-right mini">
+            <img src="img/andrea/hadiahdariandrea.jpg" alt="Hadiah 1">
+            <div class="polaroid-caption">Dia tau banget cara bikin aku happy.</div>
+          </div>
+          <div class="polaroid tilt-left mini">
+            <img src="img/andrea/hadiahdariandrea2.jpg" alt="Hadiah 2">
+            <div class="polaroid-caption">Serius ini lucu banget.</div>
+          </div>
+          <div class="polaroid tilt-none mini">
+            <img src="img/andrea/hadiahdariandrea3.jpg" alt="Hadiah 3">
+            <div class="polaroid-caption">Tiap hadiahnya punya cerita.</div>
+          </div>
+          <div class="polaroid tilt-right mini">
+            <img src="img/andrea/hadiahdariandrea4.jpeg" alt="Hadiah 4">
+            <div class="polaroid-caption">Thank you sayaaang.</div>
+          </div>
+          <div class="polaroid tilt-left mini">
+            <img src="img/andrea/stuffgancicoupledariandrea.jpg" alt="Ganci couple">
+            <div class="polaroid-caption">Ganci couple kita — literally matching.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 4 -->
+      <div class="stuff-scatter ss4">
+        <img src="img/stuff/stuffprangkovalentine.jpg" class="stuff-item s-stamp" alt="Stamp">
+        <img src="img/stuff/stuffmegaphone.png" class="stuff-item s-mega2" alt="Megaphone">
+      </div>
+
+      <!-- MOMENT: Wallpaper Laptop -->
+      <div class="moment-section">
+        <div class="moment-label">Wallpaper Laptop</div>
+        <div class="polaroid-cluster">
+          <div class="polaroid tilt-none featured">
+            <img src="img/andrea/wallpaperlaptop.jpg" alt="Wallpaper laptop">
+            <div class="polaroid-caption">Dari awal beli laptop, udah majang foto dia duluan.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 5 -->
+      <div class="stuff-scatter ss5">
+        <img src="img/stuff/stuffuno.jpg" class="stuff-item s-uno2" alt="Uno">
+        <img src="img/stuff/stufflovetulisanmygirlkecil.png" class="stuff-item s-mygirl2" alt="My Girl">
+        <img src="img/stuff/stuffbuketbungamatahari.png" class="stuff-item s-buket2" alt="Buket">
+      </div>
+
+      <!-- MOMENT: Photobooth -->
+      <div class="moment-section">
+        <div class="moment-label">Photobooth Bareng</div>
+        <div class="polaroid-cluster cluster-wide">
+          <div class="polaroid tilt-left">
+            <img src="img/andrea/WhatsApp Image 2026-05-15 at 20.39.38 (3).jpeg" alt="Photobooth">
+            <div class="polaroid-caption">Pose terbaik kita.</div>
+          </div>
+          <div class="polaroid tilt-right">
+            <img src="img/andrea/photobooth.png" alt="Photobooth">
+            <div class="polaroid-caption">Senyumnya bikin melt.</div>
+          </div>
+          <div class="polaroid tilt-none">
+            <img src="img/andrea/photobooth (1).png" alt="Photobooth 1">
+            <div class="polaroid-caption">Momen ini tersimpan manis.</div>
+          </div>
+          <div class="polaroid tilt-left">
+            <img src="img/andrea/photobooth (3).png" alt="Photobooth 3">
+            <div class="polaroid-caption">Foto bareng, happy bareng.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 6 -->
+      <div class="stuff-scatter ss6">
+        <img src="img/stuff/stuffowen.png" class="stuff-item s-owen2" alt="Owen">
+        <img src="img/stuff/stuffheartsticker.png" class="stuff-item s-heart2" alt="Heart">
+      </div>
+
+      <!-- MOMENT: Tidur kecapean -->
+      <div class="moment-section">
+        <div class="moment-label">Momen Kecapean</div>
+        <div class="polaroid-cluster">
+          <div class="polaroid tilt-right featured">
+            <img src="img/andrea/andrealagitidur.jpg" alt="Andrea tidur">
+            <div class="polaroid-caption">Ketiduran pas ngerjain Ujikom sampai jam 11 malem — bahkan tidurnya pun lucu.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 7 -->
+      <div class="stuff-scatter ss7">
+        <img src="img/stuff/stuffkamera.png" class="stuff-item s-kamera2" alt="Kamera">
+        <img src="img/stuff/stuffprangkovalentine.jpg" class="stuff-item s-stamp2" alt="Stamp">
+      </div>
+
+      <!-- MOMENT: Gambar pertama -->
+      <div class="moment-section">
+        <div class="moment-label">Gambar Pertama</div>
+        <div class="polaroid-cluster">
+          <div class="polaroid tilt-left featured">
+            <img src="img/andrea/stuffgambarpertamadarimaulbuatandrea.png" alt="Gambar pertama">
+            <div class="polaroid-caption">"Inget gambar ini ga?" — ini gambar pertama yang aku bikin buat kamu.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stuff scatter 8 -->
+      <div class="stuff-scatter ss8">
+        <img src="img/stuff/stuffmegaphone.png" class="stuff-item s-mega3" alt="Megaphone">
+        <img src="img/stuff/stuffuno.jpg" class="stuff-item s-uno3" alt="Uno">
+      </div>
+
+      <!-- MOMENT: Last Day School -->
+      <div class="moment-section lastday">
+        <div class="moment-label">Hari Terakhir di Sekolah</div>
+        <p class="moment-sublabel">Seragam terakhir, kenangan selamanya...</p>
+        <div class="polaroid-cluster cluster-wide">
+          <div class="polaroid tilt-left mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.38.jpeg" alt="Last day 1">
+            <div class="polaroid-caption">Hari bersejarah.</div>
+          </div>
+          <div class="polaroid tilt-right mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.39 (1).jpeg" alt="Last day 2">
+            <div class="polaroid-caption">Foto angkatan terbaik.</div>
+          </div>
+          <div class="polaroid tilt-none mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.39.jpeg" alt="Last day 3">
+            <div class="polaroid-caption">Kenangan yang nggak terlupakan.</div>
+          </div>
+          <div class="polaroid tilt-left mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.42.jpeg" alt="Last day 4">
+            <div class="polaroid-caption">Seragam terakhir.</div>
+          </div>
+          <div class="polaroid tilt-right mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.43 (1).jpeg" alt="Last day 5">
+            <div class="polaroid-caption">Perpisahan... tapi bukan akhir.</div>
+          </div>
+          <div class="polaroid tilt-none mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.43.jpeg" alt="Last day 6">
+            <div class="polaroid-caption">Semua momen berharga.</div>
+          </div>
+          <div class="polaroid tilt-left mini">
+            <img src="img/andrea/lastdayintheschool/WhatsApp Image 2026-05-15 at 20.39.45 (1).jpeg" alt="Last day 7">
+            <div class="polaroid-caption">Selalu ada di hatiku.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom nav button -->
+      <div class="sb-bottom">
+        <img src="img/stuff/stuffbungamatahari.png" class="sb-bottom-deco" alt="Deco bottom">
+        <button class="sweeties-btn" onclick="goToLetter()">
+          <span>Wanna see the sweetest things?</span>
+          <span class="btn-arrow">&rarr;</span>
+        </button>
+        <img src="img/stuff/stuffbuketbungamatahari.png" class="sb-bottom-deco2" alt="Deco bottom 2">
+      </div>
+
+    </div><!-- end sb-content -->
+  </div><!-- end scrapbook-screen -->
+
+  <!-- ========== SECTION 4: SECRET LETTER ========== -->
+  <div id="letter-screen" class="screen">
+    <div class="lt-bg" style="background-image: url('img/stuff/bg4.jpg')"></div>
+    <div class="lt-overlay"></div>
+
+    <!-- Deco stuffs -->
+    <img src="img/stuff/stuffpotongankertas.png" class="lt-deco lt-deco-1" alt="Deco 1">
+    <img src="img/stuff/stuffpotongankoran.png" class="lt-deco lt-deco-2" alt="Deco 2">
+    <img src="img/stuff/stuffheartsticker.png" class="lt-deco lt-deco-3" alt="Deco 3">
+    <img src="img/stuff/stufflovetulisanmygirlkecil.png" class="lt-deco lt-deco-4" alt="Deco 4">
+    <img src="img/stuff/stufftanahrumput.png" class="lt-deco lt-deco-5" alt="Deco 5">
+    <img src="img/stuff/stuffkamera.png" class="lt-deco lt-deco-6" alt="Deco 6">
+
+    <div class="lt-content">
+
+      <!-- PIN section -->
+      <div id="pin-section">
+        <div class="pin-card">
+          <div class="pin-icon">PIN</div>
+          <h2 class="pin-title">Secret Letter</h2>
+          <p class="pin-sub">Masukkan 6 digit PIN khusus buat kamu</p>
+          <div class="pin-dots" id="pinDots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="pin-error" id="pinError"></div>
+          <div class="keypad" id="keypad">
+            <button class="kp-btn" onclick="pinPress('1')">1</button>
+            <button class="kp-btn" onclick="pinPress('2')">2</button>
+            <button class="kp-btn" onclick="pinPress('3')">3</button>
+            <button class="kp-btn" onclick="pinPress('4')">4</button>
+            <button class="kp-btn" onclick="pinPress('5')">5</button>
+            <button class="kp-btn" onclick="pinPress('6')">6</button>
+            <button class="kp-btn" onclick="pinPress('7')">7</button>
+            <button class="kp-btn" onclick="pinPress('8')">8</button>
+            <button class="kp-btn" onclick="pinPress('9')">9</button>
+            <button class="kp-btn kp-clear" onclick="pinClear()">⌫</button>
+            <button class="kp-btn" onclick="pinPress('0')">0</button>
+            <button class="kp-btn kp-enter" onclick="pinEnter()">&#10003;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Letter section (hidden until PIN correct) -->
+      <div id="letter-content" class="hidden">
+        <div class="letter-paper">
+          <div class="letter-stamp">
+            <img src="img/stuff/stuffprangkovalentine.jpg" alt="Stamp">
+          </div>
+          <p class="letter-date">15 Mei 2026</p>
+          <p class="letter-salute">Buat kamu, Andrea yang paling aku sayang...</p>
+          <div class="letter-body" id="letterTypewriter"></div>
+          <p class="letter-sign">— Maulid</p>
+        </div>
+
+        <div class="gift-section" id="giftSection">
+          <button class="gift-btn" onclick="revealCoupon()">
+            Get Final Gift
+          </button>
+        </div>
+
+        <div id="coupon-section" class="hidden">
+          <div class="coupon-wrapper">
+            <img src="img/stuff/coupon.png" alt="Coupon" class="coupon-img">
+            <div class="coupon-note">
+              <p>Kalo mau claim voucher ini pas kita ketemu, cukup screenshot kupon ini dan tunjukin ke aku pas momennya kamu mau nagih.</p>
+              <p class="coupon-note-sub">Berlaku selamanya selagi kita masih bareng yaa.</p>
+            </div>
+          </div>
+          <div class="final-hearts">Happy 1st Anniversary, Bebey</div>
+        </div>
+
+      </div>
+
+    </div><!-- end lt-content -->
+  </div><!-- end letter-screen -->
+
+  <script src="script.js"></script>
+</body>
+</html>
